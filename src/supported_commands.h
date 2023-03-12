@@ -42,11 +42,11 @@ int (*builtin_func[]) (char **) = {
   &shell_quit
 };
 
+// design from: https://brennan.io/2015/01/16/write-a-shell-in-c/#shell-builtins
+//used to get num of commands to loop through all them
 int builtins_count() {
   return sizeof(builtin_str) / sizeof(char *);
 }
-// design from: https://brennan.io/2015/01/16/write-a-shell-in-c/#shell-builtins
-
 // C implementation of each command 
 
 //cd:
@@ -73,6 +73,8 @@ int shell_clr(char **args) {
 }
 
 //DIR
+//function below referenced from: https://c-for-dummies.com/blog/?p=3246
+//implementation inspired from: https://stackoverflow.com/questions/4204666/how-to-list-files-in-a-directory-in-a-c-program
 int shell_dir(char **args) {  
     DIR *folder; //pointer to a directory structure
     struct dirent *dir; //creates a dirent stucture datatype
@@ -94,10 +96,10 @@ int shell_dir(char **args) {
   
     return 1;
 }
-//function taken from: https://c-for-dummies.com/blog/?p=3246
-//implementation inspired from: https://stackoverflow.com/questions/4204666/how-to-list-files-in-a-directory-in-a-c-program
 
-
+//Environ
+//function below inspiration from: https://www.geeksforgeeks.org/c-program-print-environment-variables/
+//how to access environ: cchttps://stackoverflow.com/questions/4291080/print-the-environment-variables-using-environ
     int shell_environ(char **args) {
     //origionally tried accessing the char** envp in main as seen in the first link below but was unable 
     extern char** environ;  // now i access the variable environ from the unistd.h library 
@@ -108,9 +110,8 @@ int shell_dir(char **args) {
     }
     return 1;
 }
-//inspiration from: https://www.geeksforgeeks.org/c-program-print-environment-variables/
-//how to access environ: cchttps://stackoverflow.com/questions/4291080/print-the-environment-variables-using-environ
 
+//Echo
 int shell_echo(char **args) { //TODO : figure out how to add in multiple spaces and tabs
     int i = 1;
     while(args[i] != NULL) {
@@ -121,17 +122,21 @@ int shell_echo(char **args) { //TODO : figure out how to add in multiple spaces 
     return 1;
 }
 
+//Help
 int shell_help(char **args) { //TODO make it be able to be accessed no matter the dir
-    system("more ../manual/readme.md");  //calls the more function to display the readme in a page by page format
+    system("cat ../manual/readme.md");  //calls the more function to display the readme in a page by page format
+    printf("\n");
     return 1;
 }
 
+//Pause
 int shell_pause(char **args) { 
     printf("Process has been paused please click 'Enter' to unpause");
     while(getchar()!='\n'); //runs an infinite loop until a newline character is detected
     return 1;
 }
 
+//Quit
 int shell_quit(char **args) {
     return 0;
 }
