@@ -4,7 +4,7 @@
 #include <limits.h>
 #include <dirent.h> 
 #include <string.h>
-//#include <libgen.h>
+
 
 
 //Function prototypes for builtin shell commands:
@@ -50,6 +50,7 @@ int builtins_count() {
 // C implementation of each command 
 
 //cd:
+// how I used chdir: https://www.geeksforgeeks.org/chdir-in-c-language-with-examples/
 int shell_cd(char **args) {
     if (args[1] == NULL) {   // this is when cd isn't given a directory to change to 
 		printf("%s\n", getenv("PWD")); //returns the current working directory
@@ -64,11 +65,10 @@ int shell_cd(char **args) {
 	}
     return 1;
 }
-// how to use chdir: https://www.geeksforgeeks.org/chdir-in-c-language-with-examples/
 
 //clears terminal
 int shell_clr(char **args) {
-    system("clear");  //TODO fix
+    system("clear");
     return 1;
 }
 
@@ -124,7 +124,7 @@ int shell_echo(char **args) { //TODO : figure out how to add in multiple spaces 
 
 //Help
 int shell_help(char **args) { //TODO make it be able to be accessed no matter the dir
-    system("cat ../manual/readme.md");  //calls the more function to display the readme in a page by page format
+    system("cat ../manual/readme.md");  //calls the cat to display the readme in the man directory
     printf("\n");
     return 1;
 }

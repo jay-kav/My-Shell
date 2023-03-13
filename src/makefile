@@ -1,5 +1,7 @@
-# Jamie Kavanagh,  - Operating Systems Project 1
+# Jamie Kavanagh,
+# ID: 
 # ca216/myshell
+#
 
 make:
-	gcc -o ../bin/myshell myshell.c 
+	gcc -o ../bin/myshell myshell.c
