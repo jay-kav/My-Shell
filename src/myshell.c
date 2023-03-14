@@ -21,7 +21,7 @@ void create_environment(char** argv) {
     setenv("PWD", cwd, 1);
     free(cwd);
     //set the full path into shell 
-    setenv("SHELL", shell, 1); //only used for testing purposes
+    setenv("SHELL", shell, 1);
 }
 
 void make_prompt() {
@@ -34,20 +34,6 @@ int main(int argc, char** argv) {
     
     create_environment(argv);
    
-    //testing to ensure environment was set 
-    /* char* pwd = getenv("PWD");
-    char* shell = getenv("SHELL");
-    if (pwd == NULL) {
-        printf("PWD environment variable not set\n");
-    } else {
-        printf("PWD=%s\n", pwd);
-    }
-    if (shell == NULL) {
-        printf("SHELL environment variable not set\n");
-    } else {
-        printf("SHELL=%s\n", shell);
-    }
-    return 0;*/
 
     char *line;
     char **commands;
@@ -56,6 +42,7 @@ int main(int argc, char** argv) {
     //I have left this if statement outside the while loop as it would never been needed after the program has been run
     if (argc > 1) { //argv should only contain ./myshell unless a file is given which would increase the size from 1
         batchMode(argv[1]);
+        exit(0);
     }
 
     
@@ -65,9 +52,9 @@ int main(int argc, char** argv) {
         make_prompt(); 
         // read command line input
         line = read_in_lines(); //reads in the line from stdin
-        //printf("%s\n", line);
+        
         commands = tokenise(line); // seperates all the spaces and creates tokens for the line
-        //while ( *commands ) printf( "%s\n", *commands++ );
+        
         status = internal_commands(commands);  // sends to internal commands to check if command can be executed
         
         free(line);

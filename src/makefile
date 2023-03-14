@@ -4,4 +4,4 @@
 #
 
 make:
-	gcc -o ../bin/myshell myshell.c
+	gcc -o ../bin/myshell myshell.c utility.c supported_commands.c
