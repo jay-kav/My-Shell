@@ -3,9 +3,11 @@
 #include <string.h>
 #include <limits.h>
 #include <unistd.h>
+#include <stdbool.h>
 #include <sys/wait.h>
 #include "supported_commands.h"
 #include "utility.h"
+#include "io_redirect.h"
 
 #define MAX_LEN 1024
 #define MAX_NUM_ARGUMENTS 64
@@ -19,6 +21,7 @@ void create_environment(char** argv) {
     // set the PWD environment variable
     char* cwd = getcwd(NULL, 0);
     setenv("PWD", cwd, 1);
+    setenv("HELP", cwd, 1);
     free(cwd);
     //set the full path into shell 
     setenv("SHELL", shell, 1);
@@ -54,7 +57,10 @@ int main(int argc, char** argv) {
         line = read_in_lines(); //reads in the line from stdin
         
         commands = tokenise(line); // seperates all the spaces and creates tokens for the line
-        
+        // bool check = io_red(commands);
+        // if(!check) {
+        //     exit(EXIT_FAILURE);
+        // }
         status = internal_commands(commands);  // sends to internal commands to check if command can be executed
         
         free(line);

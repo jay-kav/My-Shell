@@ -104,8 +104,7 @@ char** tokenise(char* line) {
     return tokens;
 }
 
- int internal_commands(char **args)
-{
+ int internal_commands(char **args) {
 	// if no args, return to prompt
 	if (args[0] == NULL) {
 		return 1;

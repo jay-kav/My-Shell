@@ -16,3 +16,11 @@ extern char *builtin_str[];
 extern int (*builtin_func[]) (char **);
 
 #endif
+
+
+// TODO
+// Add in acedemic integrity para
+// figure i/o
+// check comments
+// add reference in man page
+// memory leaks

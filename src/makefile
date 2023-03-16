@@ -4,4 +4,5 @@
 #
 
 make:
-	gcc -o ../bin/myshell myshell.c utility.c supported_commands.c
+	mkdir -p ../bin
+	gcc -o ../bin/myshell myshell.c utility.c supported_commands.c io_redirect.c

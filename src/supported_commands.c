@@ -73,7 +73,6 @@ int shell_dir(char **args) {
         folder = opendir(args[1]); // opens the directory of the given agument 
     }
 
-
     if (!folder) { //checks if folder was able to be created
         perror("Unable to read directory");
         return 1; //does not break shell prompt
@@ -113,8 +112,15 @@ int shell_echo(char **args) { //TODO : figure out how to add in multiple spaces 
 
 //Help
 int shell_help(char **args) { //TODO make it be able to be accessed no matter the dir
-    system("cat ../manual/readme.md");  //calls the cat to display the readme in the man directory
-    printf("\n");
+    // system("cat ../manual/readme");  //calls the cat to display the readme in the man directory
+    // printf("\n");
+    char* shell = getenv("HELP");
+    char command[1024];
+    snprintf(command, sizeof(command), "more %s/../manual/readme", shell);
+    //printf("Command: %s\n", command);
+    system(command);
+    // printf("\n");
+
     return 1;
 }
 

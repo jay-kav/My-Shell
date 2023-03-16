@@ -10,6 +10,11 @@ USER MANUAL:
     the commands and the shells concepts.
 ---------------------------------------------------------------
 
+SYNOPSIS:
+---------------------------------------------------------------
+    ./myshell [coomand_string | file]
+---------------------------------------------------------------
+
 DESCRIPTION:
 ---------------------------------------------------------------
     MyShell is a C based terminal I created. The shell can read and execute commands that have been entered either in the commandline or read from
