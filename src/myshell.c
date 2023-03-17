@@ -36,7 +36,7 @@ void create_environment(char** argv) {
     // set the PWD environment variable
     char* cwd = getcwd(NULL, 0);
     setenv("PWD", cwd, 1);
-    setenv("HELP", cwd, 1);
+    setenv("HELP", cwd, 1); // use later for my help function
     free(cwd);
     //set the full path into shell 
     setenv("SHELL", shell, 1);
@@ -76,7 +76,8 @@ int main(int argc, char** argv) {
         // if(!check) {
         //     exit(EXIT_FAILURE);
         // }
-        status = internal_commands(commands);  // sends to internal commands to check if command can be executed
+        status = io_red(commands);
+        //status = internal_commands(commands);  // sends to internal commands to check if command can be executed
         
         free(line);
         free(commands);
