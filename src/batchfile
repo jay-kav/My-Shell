@@ -1,6 +1,4 @@
 
-echo "Start of test"
-sleep 10 &
-echo "Running in background"
-sleep 5
-echo "End of test"
+dir 
+ls
+sort < in.txt >> out.txt

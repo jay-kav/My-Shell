@@ -71,13 +71,8 @@ int main(int argc, char** argv) {
         // read command line input
         line = read_in_lines(); //reads in the line from stdin
         
-        commands = tokenise(line); // seperates all the spaces and creates tokens for the line
-        // bool check = io_red(commands);
-        // if(!check) {
-        //     exit(EXIT_FAILURE);
-        // }
-        status = io_red(commands);
-        //status = internal_commands(commands);  // sends to internal commands to check if command can be executed
+        commands = tokenise(line);   // seperates all the spaces and creates tokens for the line
+        status = io_red(commands);  // sends to internal commands to check for i/o redirection
         
         free(line);
         free(commands);

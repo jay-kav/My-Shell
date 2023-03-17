@@ -1,11 +1,3 @@
-batchfile
-in.txt
-io_redirect.c
-io_redirect.h
-makefile
-myshell.c
-out.txt
-supported_commands.c
-supported_commands.h
-utility.c
-utility.h
+dir
+run 
+bin

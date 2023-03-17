@@ -17,7 +17,7 @@
 #define IO_REDIRECT_H
 
 int io_red(char **arg);
-int file_in(char **arg, char* infile, char* outfile, bool output, bool append);
+int file_in(char **arg, char* infile, char* outfile, int output, bool append);
 int file_out(char **arg, char* outfile, bool append);
 
 

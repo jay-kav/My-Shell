@@ -22,6 +22,7 @@
 #include <limits.h>
 #include <unistd.h>
 #include <sys/wait.h>
+#include "io_redirect.h"
 
 #define MAX_NUM_ARGUMENTS 64
 #define MAX_LEN 1024
@@ -36,10 +37,14 @@ void batchMode(char *filename){
     file = fopen(filename, "r"); // opens batchfile
 
     if(file != NULL){ //checks if file is empty
-        while(fgets(arr, MAX_LEN, file) != NULL){      //while loop gets one line at a time
-            char ** commands = tokenise(arr);         //passes line to be tokenised
-            internal_commands(commands);              // sends the command to be executed
+        while(fgets(arr, MAX_LEN, file) != NULL){       //while loop gets one line at a time
+            char ** commands = tokenise(arr);          //passes line to be tokenised
+            io_red(commands);                         // sends the command to be checked for i\o redirection
         }
+    } 
+    else {                                           //error check
+        perror("Error opening file");
+        exit(EXIT_FAILURE);
     }
 
     fclose(file);     
@@ -60,8 +65,8 @@ char* read_in_lines() {
     while (1) {
         c = getchar();
         if (c == '\n' || c == EOF) {   //if char is an end of file or newline character
-            buffer[pos] = '\0'; //replace it with the NULL value
-            return buffer;  //return the line 
+            buffer[pos] = '\0';       //replace it with the NULL value
+            return buffer;           //return the line 
         } else {
             //otherwise there is more input 
             buffer[pos] = c;  
@@ -97,7 +102,7 @@ char** tokenise(char* line) {
     }
     token = strtok(line, " \r\t\n"); //removes whitespaces, tabs and newline characters
     while (token != NULL) {
-        tokens[position] = token;
+        tokens[position] = token;   //
         position++;
 
         //Checks if the memory is full
@@ -126,7 +131,7 @@ char** tokenise(char* line) {
 	}
 
 	// loop and compare to each builtin function
-	for (int i = 0; i < builtins_count(); i++)  /*todo */
+	for (int i = 0; i < builtins_count(); i++) 
 	{
 		if (!strcmp(args[0], builtin_str[i])) {
 			return (*builtin_func[i])(args);
@@ -167,12 +172,13 @@ int external_commands(char **args) {
     } else if (pid < 0) {
     // Error forking
         perror("Error forking");
+        exit(EXIT_FAILURE);
      } else {
         // Parent process
         //Checks if background processing is set to true
         if (bg) {
             // Background execution
-            printf("[%d] %s running in background\n", pid, args[0]); // added in to support background processing
+            printf("[%d] %s running in background\n", pid, args[0]); // added in to support background processing 
             return 1;
         } else {
             // Foreground execution

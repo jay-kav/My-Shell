@@ -56,7 +56,7 @@ int builtins_count() {
 //cd:
 // how I used chdir: https://www.geeksforgeeks.org/chdir-in-c-language-with-examples/
 int shell_cd(char **args) {
-    if (!args[1]) {   // this is when cd isn't given a directory to change to 
+    if (!args[1]) {                     // this is when cd isn't given a directory to change to 
 		printf("%s\n", getenv("PWD")); //returns the current working directory
 	}
 	else if (chdir(args[1]) != 0) { //chdir should return 0 if successful
@@ -64,7 +64,7 @@ int shell_cd(char **args) {
 	}
 	else {
         char* cwd = getcwd(NULL, 0); // if cd given a directory to change to
-        setenv("PWD", cwd, 1); //change the PWD to the current directory 
+        setenv("PWD", cwd, 1);      //change the PWD to the current directory 
         free(cwd);
 	}
     return 1;
@@ -80,7 +80,7 @@ int shell_clr(char **args) {
 //function below referenced from: https://c-for-dummies.com/blog/?p=3246
 //implementation inspired from: https://stackoverflow.com/questions/4204666/how-to-list-files-in-a-directory-in-a-c-program
 int shell_dir(char **args) {  
-    DIR *folder; //pointer to a directory structure
+    DIR *folder;         //pointer to a directory structure
     struct dirent *dir; //creates a dirent stucture datatype
     if (!args[1]) {
         folder = opendir("."); //opens CWD if no args given
@@ -88,12 +88,12 @@ int shell_dir(char **args) {
         folder = opendir(args[1]); // opens the directory of the given agument 
     }
 
-    if (!folder) { //checks if folder was able to be created
+    if (!folder) {   //checks if folder was able to be created
         perror("Unable to read directory");
-        return 1; //does not break shell prompt
+        return 1;    //does not break shell prompt
     }
     while ((dir = readdir(folder)) != NULL) { //reads folder until it returns nulll
-      printf("%s\n", dir->d_name); //p  rints names of all directorys in the directory
+      printf("%s\n", dir->d_name);           //prints names of all directorys in the directory
     }
     closedir(folder); //closes the pointer
   
@@ -107,9 +107,9 @@ int shell_dir(char **args) {
     //origionally tried accessing the char** envp in main as seen in the first link below but was unable 
     extern char** environ;  // now i access the variable environ from the unistd.h library 
     
-    while(*environ != NULL ) { //loop through the strings in environ until Null
-        printf("%s\n", *environ); //print line by line 
-        environ++; //increment through the list
+    while(*environ != NULL ) {          //loop through the strings in environ until Null
+        printf("%s\n", *environ);      //print line by line 
+        environ++;                    //increment through the list
     }
     return 1;
 }
@@ -117,27 +117,27 @@ int shell_dir(char **args) {
 //Echo
 int shell_echo(char **args) { //TODO : figure out how to add in multiple spaces and tabs
     int i = 1;
-    while(args[i] != NULL) {
-        printf("%s ", args[i]);
-        i++;
+    while(args[i] != NULL) {        //loops through all arguments
+        printf("%s ", args[i]);    //prints each one out one buy one
+        i++;                      //increments the while loop
     }
     printf("\n");
     return 1;
 }
 
 //Help
-int shell_help(char **args) { //TODO make it be able to be accessed no matter the dir
-    char* help = getenv("HELP");
+int shell_help(char **args) { 
+    char* help = getenv("HELP");                                            //Gets the path help set in my create environment function
     char command[1024];
     snprintf(command, sizeof(command), "more %s/../manual/readme", help); //calls my environment value Help and concatinates it to where the man page is stored 
-    system(command); //executes the command
+    system(command);                                                     //executes the command
 
     return 1;
 }
 
 //Pause
 int shell_pause(char **args) { 
-    printf("Process has been paused please click 'Enter' to unpause");
+    printf("Process has been paused please click 'Enter' to unpause\n");
     while(getchar()!='\n'); //runs an infinite loop until a newline character is detected
     return 1;
 }
