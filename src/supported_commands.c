@@ -12,6 +12,7 @@
 // others save and to the extent that such work has been cited and acknowledged within the text of my
 // work. I have used the DCU library referencing guidelines and/or the appropriate referencing system
 // recommended in the assignment guidelines and/or programme documentation.
+//The use of # in any link is to represent a dummy link to a section in the site where it was found
 
 #include "supported_commands.h"
 #include <stdio.h>
@@ -21,7 +22,7 @@
 #include <dirent.h> 
 #include <string.h>
 
-
+// design from: https://brennan.io/2015/01/16/write-a-shell-in-c/#shell-builtins
 //List of builtin commands, followed by their corresponding functions.
 char *builtin_str[] = {
   "cd",
@@ -45,8 +46,6 @@ int (*builtin_func[]) (char **) = {
   &shell_quit
 };
 
-
-// design from: https://brennan.io/2015/01/16/write-a-shell-in-c/#shell-builtins
 //used to get num of commands to loop through all them
 int builtins_count() {
   return sizeof(builtin_str) / sizeof(char *);
@@ -104,7 +103,7 @@ int shell_dir(char **args) {
 //function below inspiration from: https://www.geeksforgeeks.org/c-program-print-environment-variables/
 //how to access environ: cchttps://stackoverflow.com/questions/4291080/print-the-environment-variables-using-environ
     int shell_environ(char **args) {
-    //origionally tried accessing the char** envp in main as seen in the first link below but was unable 
+    //origionally tried accessing the char** envp in main as seen in the first link above but was unable 
     extern char** environ;  // now i access the variable environ from the unistd.h library 
     
     while(*environ != NULL ) {          //loop through the strings in environ until Null

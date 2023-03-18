@@ -12,6 +12,7 @@
 // others save and to the extent that such work has been cited and acknowledged within the text of my
 // work. I have used the DCU library referencing guidelines and/or the appropriate referencing system
 // recommended in the assignment guidelines and/or programme documentation.
+//The use of # in any link is to represent a dummy link to a section in the site where it was found
 
 #include <stdio.h>
 #include <stdlib.h>
@@ -44,7 +45,7 @@ void create_environment(char** argv) {
 
 void make_prompt() {
     char prompt[100];
-    snprintf(prompt, sizeof(prompt), "%s%s%s >> ", "\e[1;35m", getcwd(NULL, 1024), "\e[1;34m"); //format the prompt
+    snprintf(prompt, sizeof(prompt), "%s%s%s >> ", "\e[1;35m", getcwd(NULL, 1024), "\e[1;34m"); //format the prompt and style the prompt
     printf("%s", prompt); //print out the prompt
 }
 
@@ -74,7 +75,7 @@ int main(int argc, char** argv) {
         commands = tokenise(line);   // seperates all the spaces and creates tokens for the line
         status = io_red(commands);  // sends to internal commands to check for i/o redirection
         
-        free(line);
-        free(commands);
+        free(line);       //frees alocated memory in the reas_in_lines function after use
+        free(commands);  //frees alocated memory in the tokenise function after use
     }while (status);
 }

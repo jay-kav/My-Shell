@@ -12,6 +12,7 @@
 // others save and to the extent that such work has been cited and acknowledged within the text of my
 // work. I have used the DCU library referencing guidelines and/or the appropriate referencing system
 // recommended in the assignment guidelines and/or programme documentation.
+//The use of # in any link is to represent a dummy link to a section in the site where it was found
 #include <stdbool.h>
 #include <stdlib.h>
 #include <stddef.h>
@@ -26,10 +27,10 @@ int io_red(char **arg) {
     int input = 0;
     int output = 0;
     bool append = false;
-    int ipos = 0, opos = 0;
+    int ipos = 0, opos = 0;   //input position , output position
     char* infile = NULL;
     char* outfile = NULL;
-    int cut, status, i = 0;
+    int status, i = 0;
 
     while(arg[i] != NULL ) {             //loops through array 
         if (strcmp(arg[i], "<") == 0) { // checks for the input symbol
@@ -112,10 +113,4 @@ int file_out(char **arg, char* outfile, bool append) {
         printf("Failed to open file\n");  //print message if it was unable to be opened
         exit(EXIT_FAILURE);
     }
-
-    status = internal_commands(arg);       //send the arguments to the internal_commands to be executed
-    fclose(file);                         //close the file
-    freopen("/dev/tty", "a", stdout);    // redirect the output back to the commandline
-    
-    return status;
 }

@@ -12,6 +12,7 @@
 // others save and to the extent that such work has been cited and acknowledged within the text of my
 // work. I have used the DCU library referencing guidelines and/or the appropriate referencing system
 // recommended in the assignment guidelines and/or programme documentation.
+//The use of # in any link is to represent a dummy link to a section in the site where it was found
 
 #include "utility.h"
 #include "supported_commands.h"
@@ -85,7 +86,7 @@ char* read_in_lines() {
             }
         }
     }
-    exit(EXIT_FAILURE); // Placed as a precausion although it should never be triggered
+    exit(EXIT_FAILURE); 
 }
 
  //function referenced from: https://brennan.io/2015/01/16/write-a-shell-in-c/#split-line
@@ -102,7 +103,7 @@ char** tokenise(char* line) {
     }
     token = strtok(line, " \r\t\n"); //removes whitespaces, tabs and newline characters
     while (token != NULL) {
-        tokens[position] = token;   //
+        tokens[position] = token;   // creates an array of each token
         position++;
 
         //Checks if the memory is full
@@ -121,9 +122,10 @@ char** tokenise(char* line) {
     }
 
     tokens[position] = NULL; //adds Null to the end of the array
+
     return tokens;
 }
-
+//referenced from: https://brennan.io/2015/01/16/write-a-shell-in-c/#shell-builtins
  int internal_commands(char **args) {
 	// if no args, return to prompt
 	if (args[0] == NULL) {
