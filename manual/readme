@@ -12,7 +12,7 @@ USER MANUAL:
 
 SYNOPSIS:
 ---------------------------------------------------------------
-    ./myshell [coomand_string | file]
+    ./myshell [command_string | file]
 ---------------------------------------------------------------
 
 DESCRIPTION:
@@ -59,24 +59,26 @@ COMMANDS:
 
 ENVIRONMENT CONCEPTS:
 ---------------------------------------------------------------
-    The environment variables are set buy the system and are updated everytime there is a change to the environment for example
-    the use of cd would update the environment variables. The environment values are formated in a key to string value.
+    The environment variables are set buy the system and store configuration information to be accessed by various programs in the shell
+    The shell commands can view and modify these variables. Everytime there is a change to the environment the variables will be updated
+    for example the use of cd would update the environment variables.
     Examples of environment values used.
         USER - consists of the username of the current user 
         PATH - consists of a list of directories to search for executable files 
         PROMPT - The formated string to display before each command
         SHELL - conists of the pwd with the shell name appened to the end
+        HELP - a path I created so I could constantly access this manual from any directory
 ---------------------------------------------------------------
 
 I/O REDIRECTION:
 ---------------------------------------------------------------
     Input / Output redirection.
     The user can instead of reading from a commandline they can redirect input from a file as well as 
-    direct output from either the commandline or a file into another file 
+    direct output from either the commandline or a file into another file. 
     EXAMPLE:
-        '< filename' - redirects input from commandline to a file
-        '> filename' - redirects output into a file
-        '>> filename' - redirects output to a file but rather than overwriting it apends to the end
+        'sort < filename' - redirects input from file sort
+        'dir > filename' - redirects output into a file
+        'dir >> filename' - redirects output to a file but rather than overwriting it appends to the end
 
 ---------------------------------------------------------------
 
@@ -84,19 +86,24 @@ PROCESS CONCEPTS:
 ---------------------------------------------------------------
     This shell supports background and foreground processing.
     Foreground:
-        foreground is the base process commands are ran in. By typing a command and executing in it will be
-        ran in the foreground where it will fork a child process and have to wait for it to finish before
-        being able to execute the next command. 
+        Foreground execution means that the shell waits for the command to finish before executing 
+        the next one. When a command is entered and executed in the foreground, the shell will fork a 
+        child process to run the command and wait for it to finish before prompting for the next command. 
     
     Background:
         Inorder to activate background process you must enter a command with '&' appended to the end.
         EXAMPLE: 'sleep 10 &'
         Background processing runs independently from the user and when a command is executed the 
-        user does not have to wait for the child process to finish to enter the next command.
+        user does not have to wait for the child process to finish before prompting the next command.
 ---------------------------------------------------------------
 
 REFERENCES:
 ---------------------------------------------------------------
+Brennan S., 2015. Tutorial - Write a Shell in C. Available at: https://brennan.io/2015/01/16/write-a-shell-in-c/.
+C Standard Library Tutorial - Available at: https://www.tutorialspoint.com/c_standard_library/index.htm
+Advanced Programming in the UNIX Environment', W. Richard Stevens, Addison-Wesley, 1993 - Available at: https://ptgmedia.pearsoncmg.com/images/9780321637734/samplepages/0321637739.pdf
+Cobbaut P., 2015. - Linux Fundamentals. Available at: https://linux-training.be/linuxfun.pdf
+The Linux Command Line: A Complete Introduction. No Starch Press, Shotts, William E., Jr, 2012. -Available at: http://linuxcommand.org/tlcl.php
 ---------------------------------------------------------------
 
 ACKNOWLEDGMENT:

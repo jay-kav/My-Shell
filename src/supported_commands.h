@@ -31,10 +31,3 @@ extern char *builtin_str[];
 extern int (*builtin_func[]) (char **);
 
 #endif
-
-
-// TODO
-// figure i/o
-// check comments
-// add reference in man page
-// memory leaks
