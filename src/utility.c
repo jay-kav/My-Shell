@@ -32,14 +32,14 @@
 void batchMode(char *filename){
     
     FILE *file;   //file pointer
-    char arr[MAX_LEN];
+    char line[MAX_LEN];
     char** commands;
 
     file = fopen(filename, "r"); // opens batchfile
 
     if(file != NULL){ //checks if file is empty
-        while(fgets(arr, MAX_LEN, file) != NULL){       //while loop gets one line at a time
-            char ** commands = tokenise(arr);          //passes line to be tokenised
+        while(fgets(line, MAX_LEN, file) != NULL){       //while loop gets one line at a time
+            char ** commands = tokenise(line);          //passes line to be tokenised
             io_red(commands);                         // sends the command to be checked for i\o redirection
         }
     } 
@@ -47,7 +47,6 @@ void batchMode(char *filename){
         perror("Error opening file");
         exit(EXIT_FAILURE);
     }
-
     fclose(file);     
 }
 
